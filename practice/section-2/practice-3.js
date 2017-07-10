@@ -26,20 +26,26 @@ function countSameElements(collection) {
 		res.push(obj);
 		count = 0 ;
 	}
-	for(i=0,i<res.length;i++)
-	{	
-		for(j=0;j<result.length;j++)
+	while(res.length>1)
+	{	i=0;
+		if(res[i].key!=res[i+1].key)
 		{
-			if(res[i].name==result[j].name)
-			{
-				result[j].summary+=res[i].summary;
-			}
+		    var obj=new Object();
+		    obj.name=res[i].key;
+		    obj.summary=res[i].count;
+		    result.push(obj);
+			res.shift();
 		}
-			var obj=new Object();
-			obj.name=res[i].name;
-			obj.summary=res[i].summary;
-			result.push(obj);
-		}			
+		else
+		{
+			res[i+1].count+=res[i].count;
+			res.shift();
+		}
 	}
+		i=0;
+		var obj=new Object();
+    obj.name=res[i].key;
+    obj.summary=res[i].count;
+    result.push(obj);
   return result;
 }
